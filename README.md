@@ -17,7 +17,11 @@ Stock market simulator
 
 		bundle install
 
-4. Start the server.
+4. Set up the database.
+
+		rake db:create db:migrate
+
+5. Start the server.
 
 		rails server
 
