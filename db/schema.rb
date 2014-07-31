@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20140731204329) do
   end
 
   create_table "stock_data", force: true do |t|
+    t.decimal  "value",      precision: 10, scale: 8
     t.datetime "datetime"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -27,7 +28,6 @@ ActiveRecord::Schema.define(version: 20140731204329) do
 
   create_table "stocks", force: true do |t|
     t.string   "name"
-    t.string   "market"
     t.decimal  "value",      precision: 10, scale: 8
     t.datetime "created_at"
     t.datetime "updated_at"
