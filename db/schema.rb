@@ -11,33 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140731204329) do
-
-  create_table "ownerships", force: true do |t|
-    t.integer  "quantity"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "stock_data", force: true do |t|
-    t.decimal  "value",      precision: 10, scale: 8
-    t.datetime "datetime"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "stocks", force: true do |t|
-    t.string   "name"
-    t.decimal  "value",      precision: 10, scale: 8
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "users", force: true do |t|
-    t.string   "phone_number"
-    t.decimal  "credits",      precision: 10, scale: 2
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 0) do
 
 end
