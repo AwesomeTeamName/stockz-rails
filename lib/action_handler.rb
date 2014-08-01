@@ -4,9 +4,4 @@ class ActionHandler < MessageHandler
   def hello(message)
     "hello"
   end
-
-  # define Hello action
-  def Hello(message)
-    "Hello"
-  end
 end
