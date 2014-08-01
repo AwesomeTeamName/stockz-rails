@@ -16,6 +16,15 @@ class Message
     @arguments ||= arguments
   end
 
+  # Check whether the current Message is valid
+  def is_valid?
+    return false unless @raw.is_a?(String) and @raw.length > 0
+    return false unless @action.is_a?(String) and @action.length > 0
+    return false unless @arguments.is_a?(Array)
+
+    return true
+  end
+
   # Create private writers for values
 private
   attr_writer :raw
