@@ -21,4 +21,5 @@ module Twii
     end
 
     render_twiml(response)
+  end
 end
