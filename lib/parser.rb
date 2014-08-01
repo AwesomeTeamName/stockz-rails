@@ -3,7 +3,7 @@ require 'message'
 class Parser
   # Get the action from the provided message
   # Returns nil if no action is found
-  def get_action(message)
+  def self.get_action(message)
     # Validate argument type
     raise TypeError, "wrong argument type #{message.class.name} for message (expected String)" unless message.is_a?(String)
 
@@ -16,7 +16,7 @@ class Parser
 
   # Get arguments from the provided message
   # Returns an empty array if no arguments are found
-  def get_arguments(message)
+  def self.get_arguments(message)
     # Validate argument type
     raise TypeError, "wrong argument type #{message.class.name} for message (expected String)" unless message.is_a?(String)
 
@@ -36,7 +36,7 @@ class Parser
 
   # Parse a message into a Message object
   # Returns nil if an invalid message is provided
-  def parse(message)
+  def self.parse(message)
     # Validate argument type
     raise TypeError, "wrong argument type #{message.class.name} for message (expected String)" unless message.is_a?(String)
 
