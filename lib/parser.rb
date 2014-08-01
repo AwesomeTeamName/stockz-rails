@@ -1,6 +1,7 @@
 require 'message'
 
 class Parser
+  
   # Get the action from the provided message
   # Returns nil if no action is found
   def self.get_action(message)

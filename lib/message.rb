@@ -1,4 +1,5 @@
 class Message
+  
   # Create public readers for values
   attr_reader :raw
   attr_reader :action
