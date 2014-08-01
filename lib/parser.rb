@@ -1,7 +1,5 @@
-require 'message'
-
 class Parser
-  
+
   # Get the action from the provided message
   # Returns nil if no action is found
   def self.get_action(message)
@@ -37,7 +35,7 @@ class Parser
 
   # Parse a message into a Message object
   # Returns nil if an invalid message is provided
-  def self.parse(message)
+  def self.parse(message, sender)
     # Validate argument type
     raise TypeError, "wrong argument type #{message.class.name} for message (expected String)" unless message.is_a?(String)
 
@@ -52,6 +50,6 @@ class Parser
     return nil unless action.is_a?(String) && action.length > 0
 
     # Create and return Message object
-    Message.new(message, action, arguments)
+    Message.new(message, sender, action, arguments)
   end
 end
