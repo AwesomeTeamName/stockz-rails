@@ -1,5 +1,5 @@
 class Message
-  
+
   # Create public readers for values
   attr_reader :raw
   attr_reader :action
@@ -27,7 +27,8 @@ class Message
   end
 
   # Create private writers for values
-private
+  private
+
   attr_writer :raw
   attr_writer :action
   attr_writer :arguments
