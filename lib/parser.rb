@@ -1,4 +1,4 @@
-require_relative 'message'
+require 'message'
 
 class Parser
   # Get the action from the provided message
