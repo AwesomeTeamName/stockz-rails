@@ -15,13 +15,15 @@ class MessageHandler
       method = self.method(action_sym)
     else
       # Iterate all methods and select the appropriate method
-      method = self.methods.select do |m|
+      method_sym = self.methods.select do |m|
         if m.downcase == action_sym.downcase
           break m
         end
       end
 
-      method = self.method(method)
+      return nil unless method_sym.is_a?(Symbol)
+
+      method = self.method(method_sym)
     end
 
     return nil unless method.is_a?(Method)
