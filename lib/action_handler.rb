@@ -1,4 +1,11 @@
 class ActionHandler < MessageHandler
+  HELP = {
+    help: "View this help",
+    credits: "Get your number of credits and stocks",
+    stock: "View information about a specific stock",
+    stocks: "View the top 10 stocks (ordered by value)",
+    buy: "Buy "
+  }
 
   # get user by message
   def get_user(message)
@@ -160,5 +167,11 @@ class ActionHandler < MessageHandler
     credit_plural = 'credit'.pluralize(user.credits)
 
     "You have sold #{quantity} #{stock_plural} for #{user.credits} #{credit_plural}."
+  end
+
+  def help(message)
+    return nil unless message.is_a?(Message) && message.is_valid?
+
+    return false if message.arguments.length != 0
   end
 end
