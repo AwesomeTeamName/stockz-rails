@@ -9,6 +9,29 @@ class ActionHandler < MessageHandler
     sell: "Sell some stocks.\n Usage: sell NAME number\n Example: sell GOOG 1"
   }
 
+  MAGIC = [
+    "It is certain.",
+    "It is decidedly so.",
+    "Without a doubt.",
+    "Yes definitely.",
+    "You may rely on it.",
+    "As I see it, yes.",
+    "Most likely.",
+    "Outlook good.",
+    "Yes.",
+    "Signs point to yes.",
+    "Reply hazy try again.",
+    "Ask again later.",
+    "Better not tell you now.",
+    "Cannot predict now.",
+    "Concentrate and ask again.",
+    "Don't count on it.",
+    "My reply is no.",
+    "My sources say no.",
+    "Outlook not so good.",
+    "Very doubtful."
+  ]
+
   # get user by message
   def get_user(message)
     return nil unless message.is_a?(Message) && message.is_valid?
@@ -206,9 +229,17 @@ class ActionHandler < MessageHandler
     "You have sold #{quantity} #{stock_plural} for #{stock.value * quantity} #{credit_plural}."
   end
 
+  # define help action
   def help(message)
     return nil unless message.is_a?(Message) && message.is_valid?
 
     return false if message.arguments.length != 0
   end
+
+  def magic8(message)
+    return nil unless message.is_a?(Message) && message.is_valid?
+
+    return false if message.arguments.length != 0
+
+    MAGIC.sample
 end
