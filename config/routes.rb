@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  get 'stock/index'
-
-  get 'stock/view'
-
-  get 'stock/data'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -60,5 +54,10 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  post 'twilio/sms' => 'twilio#sms'
+  get 'stock/index'
+  get 'stock/view'
+  get 'stock/stocks'
+  get 'stock/data/:name' => 'stock#data'
+
+  post 'twilio/sms'
 end
