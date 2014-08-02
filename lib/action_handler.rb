@@ -91,6 +91,28 @@ class ActionHandler < MessageHandler
     output.join("\n")
   end
 
+  # define mystocks action
+  def mystocks(message)
+    return nil unless message.is_a?(Message)
+
+    return false if message.arguments.length != 0
+
+    self.create(message, true)
+
+    user = self.get_user(message)
+
+    return nil if user.nil?
+
+    quantities = user.ownerships.map do |ownership|
+      if ownership.quantity > 0
+        stock_plural = 'stock'.pluralize(ownership.quantity)
+        "#{ownership.stock.name}: #{ownership.quantity} stocks at #{ownership.stock.value} credits each"
+      end
+    end
+
+    quantities.join("\n")
+  end
+
   # define buy action
   def buy(message)
     return nil unless message.is_a?(Message) && message.is_valid?
