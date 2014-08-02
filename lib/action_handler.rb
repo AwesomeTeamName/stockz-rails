@@ -166,7 +166,7 @@ class ActionHandler < MessageHandler
     stock_plural = 'stock'.pluralize(quantity)
     credit_plural = 'credit'.pluralize(user.credits)
 
-    "You have sold #{quantity} #{stock_plural} for #{user.credits} #{credit_plural}."
+    "You have sold #{quantity} #{stock_plural} for #{stock.value * quantity} #{credit_plural}."
   end
 
   def help(message)
