@@ -1,10 +1,12 @@
 class ActionHandler < MessageHandler
   HELP = {
-    help: "View this help",
-    credits: "Get your number of credits and stocks",
-    stock: "View information about a specific stock",
-    stocks: "View the top 10 stocks (ordered by value)",
-    buy: "Buy "
+    help: "Show this help message.",
+    credits: "View your balance and number of stocks.",
+    stock: "View information about a specific stock.\nUsage: stock NAME\nExample: stock GOOG",
+    stocks: "View the top 10 stocks (ordered by value).",
+    mystocks: "View the list of your stocks and their value.",
+    buy: "Buy some stocks.\nUsage: buy NAME number\nExample: buy GOOG 1",
+    sell: "Sell some stocks.\nUsage: sell NAME number\nExample: sell GOOG 1"
   }
 
   # get user by message
@@ -41,7 +43,9 @@ class ActionHandler < MessageHandler
   def help(message)
     return nil unless message.is_a?(Message) && message.is_valid?
 
-    self.create(message, true)
+    return false if message.arguments.length > 0
+
+    HELP.map({ |key, value| "#{key.to_s}: #{value}" }).join("\n")
   end
 
   # define credits action
@@ -109,9 +113,9 @@ class ActionHandler < MessageHandler
 
     quantities = user.ownerships.map do |ownership|
       if ownership.quantity > 0
-        stock_plural = 'stock'.pluralize(ownership.quantity)
         value += ownership.stock.value
-        "#{ownership.stock.name}: #{ownership.quantity} stocks at #{ownership.stock.value} credits each"
+        stock_plural = 'stock'.pluralize(ownership.quantity)
+        "#{ownership.stock.name}: #{ownership.quantity} #{stock_plural} at #{ownership.stock.value} credits each"
       end
     end
 
