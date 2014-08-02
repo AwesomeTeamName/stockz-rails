@@ -158,7 +158,7 @@ class ActionHandler < MessageHandler
     user.credits += stock.value * quantity
     user.save
 
-    ownership.stocks -= quantity
+    ownership.quantity -= quantity
     ownership.save
 
     ownership.destroy if ownership.quantity == 0
