@@ -1,6 +1,6 @@
 class ActionHandler < MessageHandler
   HELP = {
-    help: "Show this help message.",
+    helpme: "Show this help message.",
     credits: "View your balance and number of stocks.",
     stock: "View information about a specific stock.\nUsage: stock NAME\nExample: stock GOOG",
     stocks: "View the top 10 stocks (ordered by value).",
@@ -40,7 +40,7 @@ class ActionHandler < MessageHandler
   end
 
   # define help action
-  def help(message)
+  def helpme(message)
     return nil unless message.is_a?(Message) && message.is_valid?
 
     return false if message.arguments.length > 0
