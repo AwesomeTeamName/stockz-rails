@@ -26,6 +26,11 @@ class TwilioController < ApplicationController
     message = Parser.parse(body, from)
     response = HANDLER.handle(message, false)
 
+    if response == false
+      render_twiml_message('Invalid arguments, reply with HELP for more information.')
+      return
+    end
+
     if not response.is_a?(String)
       render_twiml_message('Invalid action, reply with HELP for more information.')
       return
