@@ -103,6 +103,8 @@ class ActionHandler < MessageHandler
 
     return nil if user.nil?
 
+    return 'You don\'t own any stocks.' if user.ownerships.length == 0
+
     value = 0
 
     quantities = user.ownerships.map do |ownership|
@@ -113,7 +115,9 @@ class ActionHandler < MessageHandler
       end
     end
 
-    "#{quantities.join("\n")}\nTotal worth: #{value}"
+    quantities.push("Total worth: #{value} credits")
+
+    quantities.join("\n")
   end
 
   # define buy action
@@ -159,7 +163,7 @@ class ActionHandler < MessageHandler
     self.create(message, true)
 
     stock_name = message.arguments[0]
-
+tocks
     user = self.get_user(message)
 
     stock = self.get_stock(stock_name)
