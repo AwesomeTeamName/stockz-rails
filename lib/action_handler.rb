@@ -2,7 +2,7 @@ class ActionHandler < MessageHandler
 
   # get user by message
   def get_user(message)
-    return nil unless message.is_a?(Message) and message.is_valid?
+    return nil unless message.is_a?(Message) && message.is_valid?
 
     User.find_by(phone_number: message.sender)
   end
@@ -16,9 +16,9 @@ class ActionHandler < MessageHandler
 
   # define create action
   def create(message, custom_call = false)
-    return nil unless message.is_a?(Message) and message.is_valid?
+    return nil unless message.is_a?(Message) && message.is_valid?
 
-    return false if message.arguments.length > 0 and !custom_call
+    return false if message.arguments.length > 0 && !custom_call
 
     user = self.get_user(message)
 
@@ -32,14 +32,14 @@ class ActionHandler < MessageHandler
 
   # define help action
   def help(message)
-    return nil unless message.is_a?(Message) and message.is_valid?
+    return nil unless message.is_a?(Message) && message.is_valid?
 
     self.create(message, true)
   end
 
   # define credits action
   def credits(message)
-    return nil unless message.is_a?(Message) and message.is_valid?
+    return nil unless message.is_a?(Message) && message.is_valid?
 
     return false if message.arguments.length != 0
 
@@ -49,14 +49,14 @@ class ActionHandler < MessageHandler
 
     return nil if user.nil?
 
-    stock = "stock".pluralize(user.ownerships.length)
+    stock = 'stock'.pluralize(user.ownerships.length)
 
     "You currently have #{user.credits} credits and own #{user.ownerships.length} #{stock}."
   end
 
   # define stock action
   def stock(message)
-    return nil unless message.is_a?(Message) and message.is_valid?
+    return nil unless message.is_a?(Message) && message.is_valid?
 
     return false if message.arguments.length != 1
 
@@ -69,7 +69,7 @@ class ActionHandler < MessageHandler
 
   # define stocks action
   def stocks(message)
-    return nil unless message.is_a?(Message) and message.is_valid?
+    return nil unless message.is_a?(Message) && message.is_valid?
 
     return false if message.arguments.length != 0
 
@@ -86,7 +86,7 @@ class ActionHandler < MessageHandler
 
   # define buy action
   def buy(message)
-    return nil unless message.is_a?(Message) and message.is_valid?
+    return nil unless message.is_a?(Message) && message.is_valid?
 
     return false if message.arguments.length < 1 || message.arguments.length > 2
 
@@ -113,9 +113,52 @@ class ActionHandler < MessageHandler
     user.credits -= stock.value * quantity
     user.save
 
-    stock_plural = "stock".pluralize(quantity)
+    stock_plural = 'stock'.pluralize(quantity)
     ownership = Ownership.create(user: user, stock: stock, quantity: quantity)
 
     "You have purchased #{quantity} #{stock.name} #{stock_plural}."
+  end
+
+  def sell(message)
+    return nil unless message.is_a?(Message) && message.is_valid?
+
+    return false if message.arguments.length < 1 || message.arguments.length > 2
+
+    self.create(message, true)
+
+    stock_name = message.arguments[0]
+
+    user = self.get_user(message)
+
+    stock = self.get_stock(message)
+
+    return nil if user.nil?
+    return 'Please enter a valid stock name.' if stock.nil?
+
+    if message.arguments.length == 1
+      quantity = 1
+    else
+      quantity = message.arguments[1].to_i
+    end
+
+    ownership = Ownership.find_by(user: user, stock: stock)
+
+    return 'You don\'t own any of this stock' if ownership.nil? || ownership.quantity == 0
+
+    return 'Please enter a valid quantity.' if quantity < 1
+    return 'You don\'t have enough stocks.' if ownership.quantity < quantity
+
+    user.credits += stock.value * quantity
+    user.save
+
+    ownership.stocks -= quantity
+    ownership.save
+
+    ownership.destroy if ownership.quantity == 0
+
+    stock_plural = 'stock'.pluralize(quantity)
+    credit_plural = 'credit'.pluralize(user.credits)
+
+    "You have sold #{quantity} #{stock_plural} for #{user.credits} #{credit_plural}."
   end
 end
