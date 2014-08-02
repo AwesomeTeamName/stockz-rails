@@ -242,4 +242,5 @@ class ActionHandler < MessageHandler
     return false if message.arguments.length != 0
 
     MAGIC.sample
+  end
 end
