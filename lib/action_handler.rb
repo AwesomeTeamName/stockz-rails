@@ -49,7 +49,7 @@ class ActionHandler < MessageHandler
       "#{key.to_s}: #{value}"
     end
 
-    output.join("\n\n")
+    output.join("\n-\n")
   end
 
   # define credits action
