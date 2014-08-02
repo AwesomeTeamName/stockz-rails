@@ -103,14 +103,17 @@ class ActionHandler < MessageHandler
 
     return nil if user.nil?
 
+    value = 0
+
     quantities = user.ownerships.map do |ownership|
       if ownership.quantity > 0
         stock_plural = 'stock'.pluralize(ownership.quantity)
+        value += ownership.stock.value
         "#{ownership.stock.name}: #{ownership.quantity} stocks at #{ownership.stock.value} credits each"
       end
     end
 
-    quantities.join("\n")
+    "#{quantities.join("\n")}\nTotal worth: #{value}"
   end
 
   # define buy action
