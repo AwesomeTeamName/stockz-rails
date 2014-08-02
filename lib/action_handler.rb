@@ -137,7 +137,7 @@ class ActionHandler < MessageHandler
 
     user = self.get_user(message)
 
-    stock = self.get_stock(message)
+    stock = self.get_stock(stock_name)
 
     return nil if user.nil?
     return 'Please enter a valid stock name.' if stock.nil?
