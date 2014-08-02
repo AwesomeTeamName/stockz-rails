@@ -110,6 +110,9 @@ class ActionHandler < MessageHandler
     return 'Please enter a valid quantity.' if quantity < 1
     return 'You don\'t have enough credits to do that.' if stock.value * quantity > user.credits
 
+    user.credits -= stock.value * quantity
+    user.save
+
     stock_plural = "stock".pluralize(quantity)
     ownership = Ownership.create(user: user, stock: stock, quantity: quantity)
 
