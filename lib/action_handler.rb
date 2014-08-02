@@ -2,11 +2,11 @@ class ActionHandler < MessageHandler
   HELP = {
     helpme: "Show this help message.",
     credits: "View your balance and number of stocks.",
-    stock: "View information about a specific stock.\nUsage: stock NAME\nExample: stock GOOG",
+    stock: "View information about a specific stock.\n Usage: stock NAME\n Example: stock GOOG",
     stocks: "View the top 10 stocks (ordered by value).",
     mystocks: "View the list of your stocks and their value.",
-    buy: "Buy some stocks.\nUsage: buy NAME number\nExample: buy GOOG 1",
-    sell: "Sell some stocks.\nUsage: sell NAME number\nExample: sell GOOG 1"
+    buy: "Buy some stocks.\n Usage: buy NAME number\n Example: buy GOOG 1",
+    sell: "Sell some stocks.\n Usage: sell NAME number\n Example: sell GOOG 1"
   }
 
   # get user by message
