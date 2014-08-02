@@ -45,7 +45,11 @@ class ActionHandler < MessageHandler
 
     return false if message.arguments.length > 0
 
-    HELP.map({ |key, value| "#{key.to_s}: #{value}" }).join("\n")
+    output = HELP.map do |key, value|
+      "#{key.to_s}: #{value}"
+    end
+
+    output.join("\n")
   end
 
   # define credits action
@@ -167,7 +171,7 @@ class ActionHandler < MessageHandler
     self.create(message, true)
 
     stock_name = message.arguments[0]
-tocks
+
     user = self.get_user(message)
 
     stock = self.get_stock(stock_name)
