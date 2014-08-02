@@ -252,4 +252,5 @@ class ActionHandler < MessageHandler
     return false if message.arguments.length != 0
 
     "Hi there, #{message.sender}!\nThis project was built by Niam, Jack, Ellen and Billy.\nhttp://github.com/AwesomeTeamName/stockz-rails"
+  end
 end
