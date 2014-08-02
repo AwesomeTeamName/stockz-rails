@@ -236,6 +236,7 @@ class ActionHandler < MessageHandler
     return false if message.arguments.length != 0
   end
 
+  # define magic8 action
   def magic8(message)
     return nil unless message.is_a?(Message) && message.is_valid?
 
@@ -243,4 +244,12 @@ class ActionHandler < MessageHandler
 
     MAGIC.sample
   end
+
+  # define about action
+  def about(message)
+    return nil unless message.is_a?(Message) && message.is_valid?
+
+    return false if message.arguments.length != 0
+
+    "Hi there, #{message.sender}!\nThis project was built by Niam, Jack, Ellen and Billy.\nhttp://github.com/AwesomeTeamName/stockz-rails"
 end
